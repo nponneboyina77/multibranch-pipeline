@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage ("Build") {
             steps {
-                sh 'docker build -t shaikmustafa/abinay:bus .'
+                sh 'docker build -t image2 .'
             }
         }
         stage ("tag") {
@@ -15,7 +15,7 @@ pipeline {
             steps {
                 script {
                 withDockerRegistry(credentialsId: 'docker') {
-                 sh 'docker push narendra772/paytm:bus '
+                 sh 'docker push narendra772/paytm:bus'
                 }
              }
          }
