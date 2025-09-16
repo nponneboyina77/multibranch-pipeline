@@ -8,7 +8,7 @@ pipeline {
         }
         stage("Tag") {
             steps {
-                sh 'docker tag image2 narendra772/paytm:bus'
+                sh 'docker tag image2 narendra772/paytm:bank'
             }
         }
         stage("Push") {
@@ -22,7 +22,12 @@ pipeline {
         }
         stage("Deploy") {
             steps {
-                sh 'docker run -itd --name bus -p 8888:80 narendra772/paytm:bus'
+                script {
+                    sh '''
+                        docker rm -f bank || true
+                        docker run -itd --name bank -p 4455:80 narendra772/paytm:bus
+                    '''
+                }
             }
         }
     }
