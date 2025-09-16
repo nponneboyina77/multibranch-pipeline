@@ -1,29 +1,28 @@
 pipeline {
     agent any
     stages {
-        stage ("Build") {
+        stage("Build") {
             steps {
                 sh 'docker build -t image2 .'
             }
         }
-        stage ("tag") {
-               steps {
-                   sh "docker tag image2 narendra772/paytm:bus"
-               }
+        stage("Tag") {
+            steps {
+                sh 'docker tag image2 narendra772/paytm:bus'
+            }
         }
-        stage('push') {
+        stage("Push") {
             steps {
                 script {
-                withDockerRegistry(credentialsId: 'docker') {
-                 sh 'docker push narendra772/paytm:bus'
+                    withDockerRegistry(credentialsId: 'docker') {
+                        sh 'docker push narendra772/paytm:bus'
+                    }
                 }
-             }
-         }
-      }
-        
-        stage ("Deploy") {
+            }
+        }
+        stage("Deploy") {
             steps {
-                sh 'docker run -itd --name bus -p 8888:80 shaikmustafa/abinay:bus'
+                sh 'docker run -itd --name bus -p 8888:80 narendra772/paytm:bus'
             }
         }
     }
