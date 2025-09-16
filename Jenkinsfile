@@ -25,7 +25,7 @@ pipeline {
                 script {
                     sh '''
                         docker rm -f train || true
-                        docker run -itd --name train -p 9999:80 narendra772/paytm:train
+                        docker run -itd --name train -p 4455:80 narendra772/paytm:train
                     '''
                 }
             }
