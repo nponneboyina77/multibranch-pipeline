@@ -8,7 +8,7 @@ pipeline {
         }
         stage("Tag") {
             steps {
-                sh 'docker tag image2 narendra772/paytm:bank'
+                sh 'docker tag image2 narendra772/paytm:bus'
             }
         }
         stage("Push") {
@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        docker rm -f bank || true
+                        docker rm -f bus || true
                         docker run -itd --name bank -p 4455:80 narendra772/paytm:bus
                     '''
                 }
