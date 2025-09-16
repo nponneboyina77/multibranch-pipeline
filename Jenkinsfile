@@ -22,7 +22,12 @@ pipeline {
         }
         stage("Deploy") {
             steps {
-                sh 'docker run -itd --name bank2 -p 4455:80 narendra772/paytm:bank'
+                script {
+                    sh '''
+                        docker rm -f bank || true
+                        docker run -itd --name bank -p 4455:80 narendra772/paytm:bank
+                    '''
+                }
             }
         }
     }
