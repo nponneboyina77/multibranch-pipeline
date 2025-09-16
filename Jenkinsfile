@@ -11,11 +11,11 @@ pipeline {
                 sh 'docker tag image2 narendra772/paytm:bus'
             }
         }
-        stage("Push") {
+        stage('push') {
             steps {
                 script {
-                    withDockerRegistry(credentialsId: 'docker') {
-                        sh 'docker push narendra772/paytm:bus'
+                    withDockerRegistry {
+                      sh 'docker push narendra772/paytm:bus '
                     }
                 }
             }
