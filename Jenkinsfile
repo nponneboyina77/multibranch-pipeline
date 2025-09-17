@@ -11,11 +11,11 @@ pipeline {
                 sh 'docker tag image3 narendra772/paytm:train'
             }
         }
-        stage('push') {
+        stage("Push") {
             steps {
                 script {
-                    withDockerRegistry {
-                      sh 'docker push narendra772/paytm:train'
+                    withDockerRegistry(credentialsId: 'docker') {
+                        sh "docker push narendra772/paytm:train"
                     }
                 }
             }
@@ -23,10 +23,7 @@ pipeline {
         stage("Deploy") {
             steps {
                 script {
-                    sh '''
-                        docker rm -f train || true
-                        docker run -itd --name train -p 4455:80 narendra772/paytm:train
-                    '''
+                    sh "docker run -itd --name train -p 4455:80 narendra772/paytm:train"
                 }
             }
         }
