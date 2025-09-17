@@ -23,7 +23,7 @@ pipeline {
         stage("Deploy") {
             steps {
                 script {
-                    sh 'docker run -itd --name train -p 4455:80 narendra772/paytm:train'
+                    sh 'docker run -itd --name train -p 4457:80 narendra772/paytm:train'
                 }
             }
         }
