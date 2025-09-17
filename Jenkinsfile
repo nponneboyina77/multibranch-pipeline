@@ -15,7 +15,7 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker') {
-                        sh "docker push narendra772/paytm:bus"
+                        sh 'docker push narendra772/paytm:bus'
                     }
                 }
             }
@@ -23,7 +23,7 @@ pipeline {
         stage("Deploy") {
             steps {
                 script {
-                    sh "docker run -itd --name bus -p 4455:80 narendra772/paytm:bus"
+                    sh 'docker run -itd --name bus -p 4455:80 narendra772/paytm:bus'
                 }
             }
         }
