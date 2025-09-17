@@ -11,11 +11,11 @@ pipeline {
                 sh 'docker tag image1 narendra772/paytm:bank'
             }
         }
-        stage('push') {
+        stage("Push") {
             steps {
                 script {
-                    withDockerRegistry {
-                      sh 'docker push narendra772/paytm:bank '
+                    withDockerRegistry(credentialsId: 'docker') {
+                        sh "docker push narendra772/paytm:bank"
                     }
                 }
             }
@@ -23,10 +23,7 @@ pipeline {
         stage("Deploy") {
             steps {
                 script {
-                    sh '''
-                        docker rm -f bank || true
-                        docker run -itd --name bank -p 4455:80 narendra772/paytm:bank
-                    '''
+                    sh "docker run -itd --name bank -p 4455:80 narendra772/paytm:bank"
                 }
             }
         }
